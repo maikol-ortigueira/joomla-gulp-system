@@ -1,0 +1,4 @@
+node_modules
+.vscode
+extensions-config.json
+joomla-gulp-config.json

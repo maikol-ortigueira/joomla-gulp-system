@@ -1,0 +1,12 @@
+{
+    "components": ["foo"],
+    "plugins": {
+        "bar": ["foo"],
+        "colegio": ["foo"]
+    },
+    "modules": {
+        "site": ["custom"],
+        "admin": ["foo"]
+    },
+    "packages": ["foo"]
+}

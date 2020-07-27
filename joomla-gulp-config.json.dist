@@ -1,0 +1,5 @@
+{
+    "wwwDir":"path_to_joomla_site",
+    "extDir":"your_extensions_path",
+    "browserProxy": "probably_localhost"
+}
