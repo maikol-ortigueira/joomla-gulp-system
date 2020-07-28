@@ -1,7 +1,8 @@
 {
     "components": ["foo"],
     "plugins": {
-        "bar": ["foo"]
+        "bar": ["foo"],
+        "system: ["foo]
     },
     "modules": {
         "site": ["foo"],
