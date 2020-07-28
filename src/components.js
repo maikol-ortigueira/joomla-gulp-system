@@ -4,17 +4,21 @@ const {
 } = require('gulp');
 
 const { getComponents } = require('./utils');
+const components = getComponents();
 
 const getTasks = (mainTasks) => {
     var results = [];
-    var components = getComponents();
 
     for (index in components) {
-        require(`../gulp-joomla-extensions/components/${components[index]}.js`);
         results.push(`${mainTasks}.${components[index]}`);
     }
     return results;
 }
+
+for (index in components) {
+    require(`../gulp-joomla-extensions/components/${components[index]}.js`);
+}
+
 
 task('clean:components', series(getTasks('clean:components')));
 task('copy:components', series(getTasks('copy:components')));

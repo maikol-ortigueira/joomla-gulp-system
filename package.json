@@ -8,8 +8,7 @@
     "del": "^5.1.0",
     "gulp": "^4.0.2"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

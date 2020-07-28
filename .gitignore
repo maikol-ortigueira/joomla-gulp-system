@@ -2,3 +2,17 @@ node_modules
 .vscode
 extensions-config.json
 joomla-gulp-config.json
+gulp-joomla-extensions
+
+!gulp-joomla-extensions/compnents/foo.js
+!gulp-joomla-extensions/modules/admin/foo.js
+!gulp-joomla-extensions/modules/site/foo.js
+!gulp-joomla-extensions/packages/foo.js
+!gulp-joomla-extensions/plugins/authetication/foo.js
+!gulp-joomla-extensions/plugins/bar/foo.js
+!gulp-joomla-extensions/plugins/content/foo.js
+!gulp-joomla-extensions/plugins/searcj/foo.js
+!gulp-joomla-extensions/plugins/system/foo.js
+
+
+

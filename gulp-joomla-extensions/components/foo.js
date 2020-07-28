@@ -103,7 +103,6 @@ task(`copy:components.${component}.admin`,
         `copy:components.${component}.admin.language`,
         () => {
             return src(`${extDir}/components/${component}/admin/**`, {
-                    read: false,
                     allowEmpty: true
                 })
                 .pipe(dest(`${wwwDir}/administrator/components/com_${component}`))
@@ -117,7 +116,6 @@ task(`copy:components.${component}.site`,
         `copy:components.${component}.site.language`,
         () => {
             return src(`${extDir}/components/${component}/site/**`, {
-                    read: false,
                     allowEmpty: true
                 })
                 .pipe(dest(`${wwwDir}/components/com_${component}`))
@@ -130,7 +128,6 @@ task(`copy:components.${component}.media`,
     series(`clean:components.${component}.media`,
         () => {
             return src(`${extDir}/components/${component}/media/**`, {
-                    read: false,
                     allowEmpty: true
                 })
                 .pipe(dest(`${wwwDir}/media/com_${component}`))

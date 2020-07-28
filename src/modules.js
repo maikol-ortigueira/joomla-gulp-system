@@ -1,8 +1,5 @@
 const { task, series } = require('gulp');
 
-const fs = require('fs');
-'./admin/foo.js'
-
 const { getGroups, getExtensions, extDir } = require('./utils');
 
 const clients = getGroups('modules');
