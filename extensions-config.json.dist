@@ -1,11 +1,10 @@
 {
     "components": ["foo"],
     "plugins": {
-        "bar": ["foo"],
-        "colegio": ["foo"]
+        "bar": ["foo"]
     },
     "modules": {
-        "site": ["custom"],
+        "site": ["foo"],
         "admin": ["foo"]
     },
     "packages": ["foo"]
