@@ -1,7 +1,8 @@
 const { task, src, series, dest } = require('gulp');
 const del = require('del');
+const zip = require('gulp-zip');
 
-const { extDir, wwwDir } = require('../../src/utils');
+const { extDir, wwwDir, releaseFolder } = require('../../src/utils');
 var package = __filename.split('/').pop().split('.')[0];
 
 const langDest = `${wwwDir}/language`;
@@ -56,3 +57,11 @@ task(`copy:packages.${package}`, series(
     `copy:packages.${package}.language`,
     `copy:packages.${package}.package`
 ));
+
+// Release package
+
+task(`release:packages.${package}`, () => {
+    return src(`${extDir}/**`)
+        .pipe(zip(`pkg_${package}.zip`))
+        .pipe(dest(`${releaseFolder}/packages/${package}`))
+})

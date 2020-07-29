@@ -1,7 +1,8 @@
 const { task, src, series, dest } = require('gulp');
 const del = require('del');
+const zip = require('gulp-zip');
 
-const { extDir, wwwDir } = require('../../src/utils');
+const { extDir, wwwDir, releaseFolder } = require('../../src/utils');
 const tasksSuffix = ['manifest', 'admin.language', 'site.language', 'admin', 'site', 'media'];
 
 const component = __filename.split('/').pop().split('.')[0];
@@ -137,3 +138,10 @@ task(`copy:components.${component}.media`,
 
 // copy:components.foo
 task(`copy:components.${component}`, series(...getTasks('copy:components', component)));
+
+// release:components.foo
+task(`release:components.${component}`, () => {
+    return src(`${extDir}/components/${component}/**`)
+        .pipe(zip(`com_${component}.zip`))
+        .pipe(dest(`${releaseFolder}/components/${component}`))
+})

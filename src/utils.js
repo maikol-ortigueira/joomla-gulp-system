@@ -1,7 +1,20 @@
-const extensions = require('../extensions-config.json');
-var { wwwDir, extDir } = require('../joomla-gulp-config.json');
+var extensions = require('../extensions-config.json');
+const fs = require('fs');
+
+var { wwwDir, extDir, releaseFolder, browserProxy } = require('../joomla-gulp-config.json');
+
+
+if (fs.existsSync(`${extDir}/joomla-gulp-config.json`)){
+    var { wwwDir, releaseFolder, browserProxy } = require(`${extDir}/joomla-gulp-config.json`); 
+}
+
+if (fs.existsSync(`${extDir}/extensions-config.json`)){
+    var extensions = require(`${extDir}/extensions-config.json`);
+}
 
 extDir = (extDir && extDir !== '') ? extDir : '../extensions';
+
+
 
 const hasComponents = () => {
     if (extensions.hasOwnProperty('components') && extensions.components.length > 0) {
@@ -64,11 +77,47 @@ const hasPackages = () => {
 }
 
 const getComponents = () => {
-    return extensions.components;
+    if (hasComponents()){
+        return extensions.components;
+    }
 }
 
 const getPackages = () => {
-    return extensions.packages;
+    if (hasPackages()){
+        return extensions.packages;
+    }
+}
+
+const getPlugins = () => {
+    var results = [];
+    if (hasPlugins()){
+        var groups = getGroups('plugins');
+        for (i in groups){
+            var group = groups[i];
+            var plugins = getExtensions('plugins', group);
+            for (index in plugins){
+                var plugin = plugins[index];
+                results.push({"group": group, "plugin": plugin})
+            }
+        }
+    }
+    return results;
+}
+
+const getModules = () => {
+    var results = [];
+    if (hasModules()){
+        var clients = getGroups('modules');
+        for (i in clients){
+            var client = clients[i];
+            var modules = getExtensions('modules', client);
+            for (index in modules){
+                var module = modules[index];
+                results.push({"client": client, "module": module})
+            }
+        }
+    }
+    return results;
 }
 
 const getGroups = (extensionType) => {
@@ -107,9 +156,14 @@ module.exports = {
     hasModules,
     hasPackages,
     getComponents,
+    getModules,
+    getPlugins,
+    getPackages,
     getGroups,
     getExtensions,
-    getPackages,
+    extensions,
     extDir,
-    wwwDir
+    wwwDir,
+    releaseFolder,
+    browserProxy
 }

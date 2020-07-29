@@ -1,5 +1,6 @@
 {
     "wwwDir":"path_to_joomla_site",
     "extDir":"your_extensions_path",
-    "browserProxy": "probably_localhost"
+    "browserProxy": "probably_localhost",
+    "releaseFolder": "your_release_folder"
 }

@@ -23,4 +23,5 @@ for (i in packages){
 
 task(`clean:packages`, series(...getTasks('clean')));
 task(`copy:packages`, series(...getTasks('copy')));
+task(`release:packages`, series(...getTasks('release')));
 

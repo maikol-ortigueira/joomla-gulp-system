@@ -3,9 +3,11 @@ const {
     series
 } = require('gulp');
 
+// Get the compnents
 const { getComponents } = require('./utils');
 const components = getComponents();
 
+// Get the main tasks
 const getTasks = (mainTasks) => {
     var results = [];
 
@@ -15,6 +17,7 @@ const getTasks = (mainTasks) => {
     return results;
 }
 
+// Requiere each component source file
 for (index in components) {
     require(`../gulp-joomla-extensions/components/${components[index]}.js`);
 }
@@ -22,3 +25,5 @@ for (index in components) {
 
 task('clean:components', series(getTasks('clean:components')));
 task('copy:components', series(getTasks('copy:components')));
+task('release:components', series(getTasks('release:components')));
+

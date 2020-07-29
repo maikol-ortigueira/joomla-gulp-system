@@ -1,12 +1,13 @@
 const { task, src, series, dest } = require('gulp');
 const del = require('del');
+const zip = require('gulp-zip');
 
-const { extDir, wwwDir } = require('../../../src/utils');
+const { extDir, wwwDir, releaseFolder } = require('../../../src/utils');
 var module = __filename.split('/').pop().split('.')[0];
 const client = __dirname.split('/').pop();
 
 const folder = client === 'admin' ? 'administrator/' : '';
-const srcDir = `${extDir}/modules/${client}/mod_${module}`;
+const srcDir = `${extDir}/modules/${client}/${module}`;
 const langDest = `${wwwDir}/${folder}language`;
 const wwwDest = `${wwwDir}/${folder}modules/mod_${module}`
 
@@ -58,3 +59,9 @@ task(`copy:modules.${client}.${module}.module`,
 
 task(`clean:modules.${client}.${module}`, series(`clean:modules.${client}.${module}.language`, `clean:modules.${client}.${module}.module`))
 task(`copy:modules.${client}.${module}`, series(`copy:modules.${client}.${module}.language`, `copy:modules.${client}.${module}.module`))
+
+task(`release:modules.${client}.${module}`, () => {
+    return src(`${srcDir}/**`)
+        .pipe(zip(`mod_${module}.zip`))
+        .pipe(dest(`${releaseFolder}/modules/${client}/${module}`))
+})

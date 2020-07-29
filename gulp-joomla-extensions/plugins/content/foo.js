@@ -1,7 +1,8 @@
 const { task, src, series, dest } = require('gulp');
 const del = require('del');
+const zip = require('gulp-zip');
 
-const { extDir, wwwDir } = require('../../../src/utils');
+const { extDir, wwwDir, releaseFolder } = require('../../../src/utils');
 var plugin = __filename.split('/').pop().split('.')[0];
 const group = __dirname.split('/').pop();
 
@@ -57,3 +58,9 @@ task(`copy:plugins.${group}.${plugin}.plugin`,
 
 task(`clean:plugins.${group}.${plugin}`, series(`clean:plugins.${group}.${plugin}.language`, `clean:plugins.${group}.${plugin}.plugin`))
 task(`copy:plugins.${group}.${plugin}`, series(`copy:plugins.${group}.${plugin}.language`, `copy:plugins.${group}.${plugin}.plugin`))
+
+task(`release:plugins.${group}.${plugin}`, () => {
+    return src(`${srcDir}/**`)
+        .pipe(zip(`plg_${group}_${plugin}.zip`))
+        .pipe(dest(`${releaseFolder}/plugins/${group}/${plugin}`))
+})

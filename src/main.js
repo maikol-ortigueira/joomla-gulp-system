@@ -1,7 +1,6 @@
 const { series, task, watch } = require('gulp');
-const { hasComponents, hasModules, hasPlugins, extDir, hasPackages } = require("./utils");
+const { hasComponents, hasModules, hasPlugins, extDir, hasPackages, browserProxy } = require("./utils");
 const browserSync = require('browser-sync').create();
-var { browserProxy } = require('../joomla-gulp-config.json');
 
 if(!browserProxy || browserProxy === ''){
     browserProxy = 'localhost';
@@ -47,6 +46,8 @@ const getTasks = (mainTask) => {
 task('clean', series(getTasks('clean')));
 
 task('copy', series(getTasks('copy')));
+
+task('release', series(getTasks('release')))
 
 task('ext-watch', series('copy', (done) => {
     browserSync.reload();

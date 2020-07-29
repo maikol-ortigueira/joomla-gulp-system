@@ -3,7 +3,7 @@ const { task, series } = require('gulp');
 const { getGroups, getExtensions, extDir } = require('./utils');
 
 const clients = getGroups('modules');
-const mainTasks = ['copy', 'clean'];
+const mainTasks = ['copy', 'clean', 'release'];
 
 const moduleTasks = (mainTask, client) => {
     var results = [];

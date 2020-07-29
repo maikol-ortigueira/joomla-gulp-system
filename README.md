@@ -4,6 +4,8 @@ This build system works exactly the same as the [joomla-gulp](https://github.com
 The difference can be found when adding new extensions to the system.
 You don't need to create new code for each extension, just copy and paste the foo.js file and rename it with your extension name.
 
+**This development works with gulp version 4**
+
 ## Getting started
 * The first thing you need is node. For installation you can go to [node.js](https://nodejs.org).
 * Next you need gulp. Once you have node installed you can follow the installation instructions [here](https://gulpjs.com/docs/en/getting-started/quick-start).
@@ -28,7 +30,7 @@ You just have to add your local installation configuration. Can be something lik
 ```bash
     {
         "wwwDir": "/var/www/html/mi_joomla",
-        "extDir": "/home/petter/mi_joomla_extensions",
+        "extDir": "/home/mike/mi_joomla_extensions",
         "browserProxy": "localhost"
     }
 ```
@@ -57,7 +59,7 @@ For these instructions we will assume that we use the configuration described ab
 
 ### Components
 The component name will be "micomponent".
-* I must have a folder named "micomponent" with the component content at `/home/petter/mi_joomla_extensions/components/micomponent`.
+* I must have a folder named "micomponent" with the component content at `/home/mike/mi_joomla_extensions/components/micomponent`.
 * The `extensions-config.json` must look like:
 ```bash
     {
@@ -73,7 +75,7 @@ In joomla! the modules can be developed for both the backend and the frontend. I
 The module name will always be "mimodule".
 
 #### Backend
-* I must have a folder named "mod_mimodule" (It must be preceded by "mod_") with the module content at `/home/petter/mi_joomla_extensions/modules/admin/mod_mimodule`
+* I must have a folder named "mod_mimodule" (It must be preceded by "mod_") with the module content at `/home/mike/mi_joomla_extensions/modules/admin/mod_mimodule`
 * The `extensions-config.json` must look like:
 ```bash
     {
@@ -89,7 +91,7 @@ The module name will always be "mimodule".
 Thats all.
 
 #### Frontend
-* I must have a folder named "mod_mimodule" with the module content at `/home/petter/mi_joomla_extensions/modules/site/mod_mimodule`
+* I must have a folder named "mod_mimodule" with the module content at `/home/mike/mi_joomla_extensions/modules/site/mod_mimodule`
 * The `extensions-config.json` must look like:
 ```bash
     {
@@ -108,7 +110,7 @@ Thats all.
 In joomla! the plugins are grouped by type of plugin, where the system plugins are added to the system folder, the authentication plugins are added to the authentication folder and so on.
 The name of the plugin will be "miplugin" and it will be of the type system.
 
-* I must have a folder named "miplugin" with the plugin content at `/home/petter/mi_joomla_extensions/plugins/system/miplugin`
+* I must have a folder named "miplugin" with the plugin content at `/home/mike/mi_joomla_extensions/plugins/system/miplugin`
 * The `extensions-config.json` must look like:
 ```bash
     {
@@ -125,3 +127,12 @@ The name of the plugin will be "miplugin" and it will be of the type system.
 * I must copy, paste and rename the `./gulp-joomla-extensions/plugins/system/foo.js` file to `./gulp-joomla-extensions/plugins/system/miplugin.js`
 
 Thats all.
+
+## More
+
+I offer you a test **joomla-scafolding-example** to serve as a basis for the construction of your packages. Here you can see the folder and file structure required for each of the extensions.
+
+## Conclusion
+
+I hope this system is useful to you, and if anything goes wrong let me know here.
+Enjoy it.
