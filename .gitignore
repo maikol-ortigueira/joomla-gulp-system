@@ -4,7 +4,7 @@ extensions-config.json
 joomla-gulp-config.json
 gulp-joomla-extensions
 
-!gulp-joomla-extensions/compnents/foo.js
+!gulp-joomla-extensions/components/foo.js
 !gulp-joomla-extensions/modules/admin/foo.js
 !gulp-joomla-extensions/modules/site/foo.js
 !gulp-joomla-extensions/packages/foo.js
