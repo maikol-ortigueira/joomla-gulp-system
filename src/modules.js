@@ -1,9 +1,12 @@
 const { task, series } = require('gulp');
 
 const { getGroups, getExtensions, extDir } = require('./utils');
+const fs = require('fs');
 
 const clients = getGroups('modules');
 const mainTasks = ['copy', 'clean', 'release'];
+
+const filesPath = `${__dirname}/../gulp-joomla-extensions/modules/`;
 
 const moduleTasks = (mainTask, client) => {
     var results = [];
@@ -11,7 +14,10 @@ const moduleTasks = (mainTask, client) => {
 
     for (i in moduleNames){
         var module = moduleNames[i];
-            require(`../gulp-joomla-extensions/modules/${client}/${module}.js`);
+            if (!fs.existsSync(`${filesPath}${client}/${module}.js`)){
+                fs.copyFileSync(`${filesPath}${client}/foo.js`, `${filesPath}${client}/${module}.js`);
+            }
+            require(`${filesPath}${client}/${module}.js`);
             results.push(`${mainTask}:modules.${client}.${module}`);
     }
     return results;
@@ -20,11 +26,11 @@ const moduleTasks = (mainTask, client) => {
 
 const clientTasks = (mainTask) => {
     var results = [];
-    
+
     for (index in clients){
         var client = clients[index];
         results.push(`${mainTask}:modules.${client}`);
-        
+
     }
     return results;
 }

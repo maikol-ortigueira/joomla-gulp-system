@@ -1,8 +1,7 @@
-var extensions = require('../extensions-config.json');
+var extConfig = require('../config.json');
+var extConfigDir = `${extConfig.extsConfigDir}/${extConfig.extName}`;
+var extensions = require(`${extConfigDir}/extensions-config.json`);
 const fs = require('fs');
-
-
-
 
 const hasComponents = () => {
     if (extensions.hasOwnProperty('components') && extensions.components.length > 0) {
@@ -15,7 +14,7 @@ const hasComponents = () => {
 const hasPlugins = () => {
     if (extensions.hasOwnProperty('plugins')) {
         var groups = extensions.plugins;
-        
+
         // Has any plugin group?
         var groupSize = 0;
         for (var groupName in groups) {
@@ -37,7 +36,7 @@ const hasPlugins = () => {
 const hasModules = () => {
     if (extensions.hasOwnProperty('modules')) {
         var clients = extensions.modules;
-        
+
         // Has any client module
         var Size = 0;
         for (var clientName in clients) {
@@ -111,13 +110,13 @@ const getModules = () => {
 
 const getGroups = (extensionType) => {
     var results = [];
-    
+
     for (group in extensions[extensionType]) {
         if (extensions[extensionType][group].length > 0){
             results.push(group);
         }
     }
-    
+
     return results;
 }
 
@@ -129,39 +128,31 @@ const getGroups = (extensionType) => {
 const getExtensions = (extensionType, group) => {
     var results = [];
     var groupExtensions = extensions[extensionType][group];
-    
+
     for (index in groupExtensions){
         if (groupExtensions[index] !== ''){
             results.push(extensions[extensionType][group][index]);
         }
     }
-    
+
     return results;
 }
 
 // Get Paths
-var { wwwDir, extDir, releaseFolder, browserProxy } = require('../joomla-gulp-config.json');
+var { wwwDir, extDir, releaseFolder, browserProxy } = require(`${extConfigDir}/joomla-gulp-config.json`);
 
 // Get extension custom paths if exists
 // If it's a package
 if (hasPackages()) {
     extDir = `${extDir}/packages/${getPackages()}`;
 }
-// If it's a component 
+// If it's a component
 else if (hasComponents()) {
     extDir = `${extDir}/components/${getComponents()}`;
 }
 // TODO if it's other extension type
 
-if (fs.existsSync(`${extDir}/joomla-gulp-config.json`)){
-    var { wwwDir, releaseFolder, browserProxy } = require(`${extDir}/joomla-gulp-config.json`); 
-}
-
-if (fs.existsSync(`${extDir}/extensions-config.json`)){
-    var extensions = require(`${extDir}/extensions-config.json`);
-}
-
-extDir = (extDir && extDir !== '') ? extDir : '../extensions';
+//extDir = (extDir && extDir !== '') ? extDir : '../extensions';
 
 module.exports = {
     hasComponents,

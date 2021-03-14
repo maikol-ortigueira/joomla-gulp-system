@@ -3,6 +3,8 @@ const {
     series
 } = require('gulp');
 
+const fs = require('fs');
+
 // Get the compnents
 const { getComponents } = require('./utils');
 const components = getComponents();
@@ -19,7 +21,14 @@ const getTasks = (mainTasks) => {
 
 // Requiere each component source file
 for (index in components) {
-    require(`../gulp-joomla-extensions/components/${components[index]}.js`);
+    let filesPath = `${__dirname}/../gulp-joomla-extensions/components/`;
+    let filePath = `${filesPath}${components[index]}.js`
+
+    if (!fs.existsSync(filePath)){
+        fs.copyFileSync(`${filesPath}foo.js`, filePath)
+    }
+
+    require(filePath);
 }
 
 
